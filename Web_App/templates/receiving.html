@@ -6,45 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=styles.css>
-    <title>Football Data</title>
+    <title>Receiving Data</title>
 </head>
 
 <body>
-    <article class="content">
-        <h1> NFL Receiving Leaders</h1>
-        <ul>
-            <li><a href="index.html">Passing</a></li>
+    <article id="content">
+        <h1 style = "text-align:left; font-size:40px"> NFL Receiving Leaders</h1>
+        <ul class = nav>
+            <li><a href="passing.html">Passing</a></li>
             <li><a href="receiving.html">Receiving</a></li>
             <li><a href="rushing.html">Rushing</a></li>
         </ul>
-        <table border="2" id="data-table" class="table">
+        <br>
+        <input type="text" id="search" onkeyup = "filter()" placeholder="Search for a player...">
+        <br>
+        <table id="data-table" class="table">
             <thead>
                 <tr>
-                    <th>Player</th>
-                    <th>Team</th>
-                    <th>Age</th>
-                    <th>Pos</th>
-                    <th>G</th>
-                    <th>GS</th>
-                    <th>Rec</th>
-                    <th>Ctch%</th>
-                    <th>Yds</th>
-                    <th>Y/R</th>
-                    <th>TD</th>
-                    <th>1D</th>
-                    <th>Succ%</th>
-                    <th>Lng</th>
-                    <th>Y/Tgt</th>
-                    <th>R/G</th>
-                    <th>Y/G</th>
-                    <th>Fmb</th>
+                    <th onclick = "sortTable(0)">Player</th>
+                    <th onclick = "sortTable(1)">Team</th>
+                    <th onclick = "sortTable(2)">Age</th>
+                    <th onclick = "sortTable(3)">Pos</th>
+                    <th onclick = "sortTable(4)">G</th>
+                    <th onclick = "sortTable(5)">GS</th>
+                    <th onclick = "sortTable(6)">Tgt</th>
+                    <th onclick = "sortTable(7)">Rec</th>
+                    <th onclick = "sortTable(8)">Ctch%</th>
+                    <th onclick = "sortTable(9)">Yds</th>
+                    <th onclick = "sortTable(10)">Y/R</th>
+                    <th onclick = "sortTable(11)">TD</th>
+                    <th onclick = "sortTable(12)">1D</th>
+                    <th onclick = "sortTable(13)">Succ%</th>
+                    <th onclick = "sortTable(14)">Lng</th>
+                    <th onclick = "sortTable(15)">Y/Tgt</th>
+                    <th onclick = "sortTable(16)">R/G</th>
+                    <th onclick = "sortTable(17)">Y/G</th>
+                    <th onclick = "sortTable(18)">Fmb</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Data rows will be inserted here dynamically -->
             </tbody>
         </table>
+        <footer>
+            <p>Created by: <a href="https://github.com/tlin41390"></a>Terence Lin</p>
+        </footer>
         <script src="populate_table.js"></script>
+        <script src="filter-search.js"></script>
+        <script src = "sortTable.js"></script>
     </article>
 </body>
 

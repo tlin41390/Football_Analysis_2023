@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
-import json
 from webdriver_manager.chrome import ChromeDriverManager
 
 load_dotenv()
@@ -14,6 +13,7 @@ load_dotenv()
 def get_stats(link, id):
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
     driver = webdriver.Chrome(service=service, options=options)
     driver.get(link)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -47,6 +47,7 @@ def process_text(table):
 def upload_db(data_list,collection):
     client = MongoClient(os.getenv('MONGO_URI'))
     db = client["local"]
+    db[collection].drop()
     collection = db[collection]
     collection.insert_many(data_list)
 
@@ -59,7 +60,6 @@ def main():
 
     passers = process_text(passing)
     rushers = process_text(rushing)
-    print(rushers)
     receivers = process_text(receiving)
 
     upload_db(passers,"passing")

@@ -1,12 +1,22 @@
 import { MongoClient } from 'mongodb';
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const env_path = path.resolve(__dirname, '../../.env');
+
+dotenv.config({ path: env_path})
 const app = express();
 app.use(cors());
-const uri = "mongodb://localhost:27017";
-const port = 3000;
+const uri = process.env.MONGO_URI;
 async function main() {
-    app.listen(port, () => console.log('listening on 3000'));
+    app.listen(3000, () => {
+        console.log('listening on 3000');
+    });
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     app.get('/passing', async (req, res) => {
@@ -63,8 +73,3 @@ async function main() {
     
 }
 main().catch(console.error);
-//Get all entries in the 'passing' collection exclude the _id field
-// async function retrieveCollections(client){
-//     const cursor = client.db("local").collection("passing").find({}).project({_id:0});
-//     const results = await cursor.toArray();
-// }
