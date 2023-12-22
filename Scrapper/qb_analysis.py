@@ -1,22 +1,15 @@
-import collections
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
-from webdriver_manager.chrome import ChromeDriverManager
 
 load_dotenv()
 
 
 def get_stats(link, id):
-    service = Service(ChromeDriverManager().install())
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    driver = webdriver.Chrome(service=service, options=options)
-    driver.get(link)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    page = requests.get(link)
+    soup = BeautifulSoup(page.content, 'html.parser')
 
     table = soup.find(id=id).find('tbody')
 
